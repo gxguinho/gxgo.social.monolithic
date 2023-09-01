@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="onSubmit();">
+      <input type="text" placeholder="username" id="username" />
+      <input type="text" placeholder="password" id="password" />
+      <button type="submit">Login</button>
+    </form>
+
+    <script>
+      function onSubmit(e) {
+        e.preventDefault();
+        console.log("32132");
+        const username = e.target[0].value;
+        const password = e.target[1].value;
+
+        console.log(username, password);
+      }
+    </script>
+  </body>
+</html>
