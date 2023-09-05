@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/styles/global.css" />
+    <link rel="stylesheet" href="/public/styles/home.css" />
+    <link rel="stylesheet" href="/public/styles/profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title><%= model.username %></title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('./shared/sidebar', { username: model.profileUsername })%>
+
+      <main class="profile-container">
+        <header class="heading">
+          <a type="button" href="/home">
+            <i data-lucide="chevron-left"></i>
+          </a>
+
+          <div>
+            <span><%= model.user.name %></span>
+            <span><%= model.qtdPosts %></span>
+          </div>
+        </header>
+
+        <section>
+          <header class="profile-info">
+            <div class="avatar-wrapper">
+              <img src="https://github.com/gxguinho.png" alt="" />
+
+              <% if(model.isYourProfile){ %>
+              <button type="button">Editar perfil</button>
+              <% } else{ %> <% if(model.isFollower){ %>
+              <button
+                type="button"
+                class="unfollow"
+                onclick="handleFollow('unfollow')"
+              >
+                deixar de seguir
+              </button>
+              <% } else{ %>
+              <button
+                type="button"
+                class="follow"
+                onclick="handleFollow('follow')"
+              >
+                Seguir
+              </button>
+              <% } %> <% } %>
+            </div>
+
+            <h4><%= model.user.name %></h4>
+            <span class="username"><%= model.user.username %></span>
+
+            <div class="followers-wrapper">
+              <a href="/user/profile/<%= model.username %>/following"
+                ><span
+                  ><strong><%= model.followingCount %></strong> Seguindo</span
+                ></a
+              >
+              <a href="/user/profile/<%= model.username %>/followers">
+                <span
+                  ><strong><%= model.followersCount %></strong> Seguidores</span
+                ></a
+              >
+            </div>
+          </header>
+
+          <main style="padding: 0">
+            <% model.posts.forEach((post)=>{ %> <%- include('./shared/post.ejs',
+            { post, user: model.user })%> <% }) %>
+          </main>
+        </section>
+      </main>
+
+      <aside class="right-sidebar">
+        <%- include('./shared/home/search.ejs')%>
+      </aside>
+    </div>
+  </body>
+</html>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  lucide.createIcons();
+
+  function handleFollow(e) {
+    const button = document.getElementById(e);
+
+    axios
+      .post("/user/follow/<%= model.user.id %>")
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+</script>

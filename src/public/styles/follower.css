@@ -1,0 +1,175 @@
+.follower-main {
+  padding: 2rem 0 !important;
+}
+
+.follower-heading {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: start;
+
+  padding: 0 2rem 1rem;
+  gap: 2rem;
+}
+
+.follower-heading div:first-child {
+  display: flex;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.follower-heading div div span:first-child {
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  display: block;
+
+  margin-bottom: 4px;
+}
+
+.follower-heading div div span {
+  font-size: 0.875rem;
+  font-weight: 400;
+
+  display: block;
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+}
+
+.nav-container a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-700);
+  padding: 1.5rem;
+}
+
+.nav-container a.active {
+  opacity: 0.6;
+}
+
+.nav-container a:hover {
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.follower-heading button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: var(--white);
+}
+
+.follower-container {
+  display: grid;
+  border-top: 1px solid var(--green-300);
+  margin-top: 2rem;
+}
+
+.follower-user {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+  padding: 2rem 2rem;
+}
+
+.follower-user:hover {
+  cursor: pointer;
+  background-color: var(--gray-700);
+  transition: all 0.2s;
+}
+
+.follower-user img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.follower-user div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.follower-user div h4 {
+  font-style: normal;
+  font-weight: 700;
+
+  margin-bottom: 0.5rem;
+}
+
+.follower-user div h4:hover {
+  text-decoration: underline;
+}
+
+.follower-user div span {
+  font-size: 16px;
+  font-weight: 400;
+
+  color: var(--gray-300);
+}
+
+.follower-user button {
+  width: 160px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+
+  border-radius: 8px;
+
+  background-color: var(--green-500);
+  color: var(--white);
+
+  margin-left: auto;
+}
+
+.follower-user .follow {
+  background-color: var(--green-500);
+
+  transition: background-color 0.2s;
+}
+
+.follower-user .follow:hover {
+  background-color: var(--green-300);
+
+  transition: background-color 0.2s;
+}
+
+.follower-user .unfollow {
+  background-color: var(--red-500);
+
+  transition: background-color 0.2s;
+}
+
+.follower-user .unfollow:hover {
+  background-color: var(--red-300);
+
+  transition: background-color 0.2s;
+}
+
+.following-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  background-color: var(--gray-700);
+  padding: 0.5rem;
+}

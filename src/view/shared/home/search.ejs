@@ -1,0 +1,53 @@
+<div class="search-input">
+  <input type="text" placeholder="Busque um Usuario" id="search-user" />
+
+  <div class="dropdown"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  document
+    .querySelector("#search-user")
+    .addEventListener("keydown", handleSearch);
+
+  function handleDeleteUsers() {
+    const dropdownContainer = document.querySelector(".dropdown");
+
+    dropdownContainer.innerHTML = "";
+  }
+
+  async function handleSearch() {
+    const search = document.querySelector("#search-user").value;
+
+    const response = await axios.get(`/user?search=${search}`);
+
+    const dropdownContainer = document.querySelector(".dropdown");
+    dropdownContainer.innerHTML = "";
+
+    if (response.status === 200 && response?.data?.users?.length > 0) {
+      const users = response.data.users;
+
+      users.forEach((user, index) => {
+        const a = document.createElement("a");
+        a.setAttribute(
+          "href",
+          `/user/profile/${user.username.replace("#", "")}`
+        );
+        a.classList.add("user-info");
+
+        const html = `
+          <img src="https://github.com/gxguinho.png" alt="" />
+          <div>
+            <span class="name">${user.name}</span>
+            <span class="username">${user.username}</span>
+          </div>
+        `;
+
+        a.innerHTML = html;
+        a.dataset.index = index;
+
+        dropdownContainer.appendChild(a);
+      });
+    }
+  }
+</script>

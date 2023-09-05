@@ -1,0 +1,30 @@
+<a href="/post/<%= post.id %>" class="post-container">
+  <article>
+    <img class="post-avatar" src="https://github.com/gxguinho.png" alt="" />
+    <div style="width: 100%">
+      <header>
+        <div>
+          <span class="name anchor"><%= user.name %></span>
+          <span class="username"><%= user.username %></span>
+          <span>-</span>
+          <span class="username"
+            ><%= new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month:
+            'short', day: '2-digit'}).format(new Date(post.createdAt)) %>
+          </span>
+        </div>
+
+        <button class="icon-button focus">
+          <i data-lucide="more-horizontal"></i>
+        </button>
+      </header>
+
+      <p class="post"><%= post.content %></p>
+
+      <footer>
+        <button class="icon-button button-like">
+          <i data-lucide="heart"></i>
+        </button>
+      </footer>
+    </div>
+  </article>
+</a>

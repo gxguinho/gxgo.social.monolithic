@@ -1,0 +1,75 @@
+.unique-post-container {
+}
+
+.unique-post-container header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+.unique-post-container header img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.unique-post-container header div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  border-radius: 50%;
+
+  margin-right: 2rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: var(--gray-300);
+
+  margin-left: auto;
+}
+
+.icon-button.focus:hover {
+  opacity: 0.6;
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--green-500);
+
+  transition: all 0.2s;
+}
+
+.unique-post-container footer {
+  margin-top: 2rem;
+}
+
+.unique-post-container footer .createdAt {
+  color: var(--gray-300);
+  font-size: 0.875rem;
+}
+
+.unique-post-container footer .actions {
+  border-top: 1px solid var(--green-500);
+  padding-top: 1rem;
+
+  display: flex;
+  font-size: 0.875rem;
+
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.unique-post-container footer .actions a:hover {
+  text-decoration: underline;
+  opacity: 0.6;
+  cursor: pointer;
+}

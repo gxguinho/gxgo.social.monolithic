@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/styles/global.css" />
+    <link rel="stylesheet" href="../public/styles/home.css" />
+    <link rel="stylesheet" href="/public/styles/unique-post.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>josemar</title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('./shared/sidebar')%>
+
+      <main class="unique-post-container">
+        <header>
+          <img
+            class="post-avatar"
+            src="https://github.com/gxguinho.png"
+            alt=""
+          />
+          <div>
+            <span class="name anchor"><%- model.post.user.name %></span>
+            <span class="username"><%- model.post.user.username %> </span>
+          </div>
+
+          <button class="icon-button focus">
+            <i data-lucide="more-horizontal"></i>
+          </button>
+        </header>
+
+        <p><%- model.post.content %></p>
+
+        <footer>
+          <span class="createdAt"
+            ><%= new Intl.DateTimeFormat('pt-BR', { hour: "2-digit", minute:
+            "2-digit", }).format(new Date(model.post.createdAt)) %>
+          </span>
+          <span>-</span>
+          <span class="createdAt"
+            ><%= new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month:
+            'short', day: '2-digit'}).format(new Date(model.post.createdAt)) %>
+          </span>
+
+          <div class="actions">
+            <a href="">2 Comentários</a>
+            <a href="">884 Curtidas</a>
+          </div>
+        </footer>
+      </main>
+
+      <aside class="right-sidebar">
+        <%- include('./shared/home/search.ejs')%>
+      </aside>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

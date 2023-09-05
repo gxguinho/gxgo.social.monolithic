@@ -1,0 +1,25 @@
+<aside class="sidebar">
+  <section>
+    <a href="/home"><i data-lucide="layout-grid"></i><span>Home</span></a>
+    <a href="/user/profile/<%= username %>"
+      ><i data-lucide="user"></i><span>Profile</span></a
+    >
+    <a href="/auth/logout"><i data-lucide="log-in"></i><span>Sair</span></a>
+    <button>New Post</button>
+  </section>
+</aside>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+  lucide.createIcons();
+
+  if (window.location.pathname === "/home") {
+    document.querySelector('a[href="/home"]').classList.add("active");
+  }
+
+  if (window.location.pathname === "/user/profile/<%= username %>") {
+    document
+      .querySelector('a[href="/user/profile/<%= username %>"]')
+      .classList.add("active");
+  }
+</script>

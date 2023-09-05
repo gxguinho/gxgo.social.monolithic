@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/styles/global.css" />
+    <link rel="stylesheet" href="/public/styles/home.css" />
+    <link rel="stylesheet" href="/public/styles/follower.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title><%= model.username %></title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('./shared/sidebar', { username: model.profileUsername })%>
+
+      <main class="follower-main">
+        <header class="follower-heading">
+          <div>
+            <a type="button" href="/user/profile">
+              <i data-lucide="chevron-left"></i>
+            </a>
+
+            <div>
+              <span>#<%= model.username %></span>
+            </div>
+          </div>
+
+          <div class="nav-container">
+            <a
+              id="following"
+              href="/user/profile/<%= model.username %>/following"
+              >Seguindo</a
+            >
+            <a
+              id="followers"
+              href="/user/profile/<%= model.username %>/followers"
+              >Seguidores</a
+            >
+          </div>
+        </header>
+
+        <section class="follower-container">
+          <% model.users.forEach((user)=>{ %>
+          <div class="follower-user">
+            <img src="http://github.com/gxguinho.png" alt="" />
+
+            <div>
+              <a href="/user/profile/<%= user.usernameNoHashtag %>">
+                <h4><%- user.name %></h4></a
+              >
+              <span class="username"><%- user.username %></span>
+            </div>
+
+            <%if (user.isFollowed) { %>
+            <span class="following-badge">Segue você</span>
+            <% } %> <% if(!user.isFollower){ %>
+            <button
+              id="button-<%= user.id %>"
+              type="button"
+              class="follow"
+              onclick="handleFollow('<%= user.id %>')"
+            >
+              Seguir
+            </button>
+            <% } else{ %>
+            <button
+              id="button-<%= user.id %>"
+              type="button"
+              class="unfollow"
+              onclick="handleFollow('<%= user.id %>')"
+            >
+              Deixar de seguir
+            </button>
+            <% } %>
+          </div>
+          <% }) %>
+        </section>
+      </main>
+
+      <aside class="right-sidebar">
+        <%- include('./shared/home/search.ejs')%>
+      </aside>
+    </div>
+  </body>
+</html>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  lucide.createIcons();
+
+  if (window.location.pathname.includes("following")) {
+    document.querySelector("#following").classList.add("active");
+  }
+
+  if (window.location.pathname.includes("followers")) {
+    document.querySelector("#followers").classList.add("active");
+  }
+
+  function handleFollow(id) {
+    axios
+      .post(`/user/follow/${id}`)
+      .then((response) => {
+        if (response.data?.message === "successfully unfollow") {
+          document.querySelector(`#button-${id}`).classList.remove("unfollow");
+          document.querySelector(`#button-${id}`).classList.add("follow");
+          document.querySelector(`#button-${id}`).innerHTML = "Seguir";
+        } else {
+          document.querySelector(`#button-${id}`).classList.remove("follow");
+          document.querySelector(`#button-${id}`).classList.add("unfollow");
+          document.querySelector(`#button-${id}`).innerHTML =
+            "Deixar de seguir";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+</script>
