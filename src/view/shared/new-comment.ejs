@@ -1,0 +1,34 @@
+<form class="new-post" onsubmit="handleNewPost(event); event.preventDefault();">
+  <section>
+    <textarea
+      name="content"
+      id="content"
+      placeholder="create new comment"
+      maxlength="280"
+    ></textarea>
+  </section>
+
+  <button class="btn-new-post" type="submit">comment</button>
+</form>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  lucide.createIcons();
+
+  async function handleNewPost() {
+    const content = document.querySelector("#content").value;
+    const uriMedia = "";
+
+    const data = {
+      content,
+      uriMedia,
+    };
+
+    const response = await axios.post("/post", data);
+
+    if (response.status === 200) {
+      const content = (document.querySelector("#content").value = "");
+    }
+  }
+</script>

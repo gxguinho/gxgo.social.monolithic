@@ -56,7 +56,7 @@
               <span class="username"><%- user.username %></span>
             </div>
 
-            <%if (user.isFollowed) { %>
+            <%if (!user.isUser) { %> <%if (user.isFollowed) { %>
             <span class="following-badge">Segue você</span>
             <% } %> <% if(!user.isFollower){ %>
             <button
@@ -76,7 +76,7 @@
             >
               Deixar de seguir
             </button>
-            <% } %>
+            <% } %> <% } %>
           </div>
           <% }) %>
         </section>

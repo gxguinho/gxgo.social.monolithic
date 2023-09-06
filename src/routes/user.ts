@@ -168,6 +168,7 @@ export async function userRoutes(app: FastifyInstance) {
           usernameNoHashtag,
           isFollowed,
           isFollower: true,
+          isUser: follower.followerId === request.user.sub,
         });
       }
 
@@ -217,6 +218,7 @@ export async function userRoutes(app: FastifyInstance) {
           usernameNoHashtag,
           isFollowed: true,
           isFollower,
+          isUser: follower.followingId === request.user.sub,
         });
       }
 

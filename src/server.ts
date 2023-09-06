@@ -46,7 +46,6 @@ app.register(userRoutes, { prefix: "/user" });
 
 app.get("/", (request, reply) => {
   if (request.cookies.token) {
-    console.log(request.cookies.token);
     reply.redirect("/home");
   } else {
     reply.redirect("/auth/login");

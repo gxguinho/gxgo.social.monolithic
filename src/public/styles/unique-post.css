@@ -59,12 +59,14 @@
 
 .unique-post-container footer .actions {
   border-top: 1px solid var(--green-500);
+  border-bottom: 1px solid var(--green-500);
   padding-top: 1rem;
 
   display: flex;
   font-size: 0.875rem;
 
-  margin-top: 1rem;
+  margin: 1rem 0;
+  padding-bottom: 1rem;
   gap: 1rem;
 }
 
@@ -72,4 +74,39 @@
   text-decoration: underline;
   opacity: 0.6;
   cursor: pointer;
+}
+
+.divider {
+  margin: 1rem 0;
+}
+
+.button-like:hover,
+.button-like.liked {
+  color: var(--red-300);
+
+  transition: color 0.2s;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: var(--gray-300);
+}
+
+.icon-button.focus:hover {
+  opacity: 0.6;
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--green-500);
+
+  transition: all 0.2s;
+}
+
+.comment {
+  margin-top: 1.5rem;
+
+  padding-bottom: 1rem;
+
+  border-bottom: 1px solid var(--green-500);
 }
