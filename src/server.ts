@@ -10,6 +10,8 @@ import { authenticate } from "./plugins/authenticate";
 import { postRoutes } from "./routes/post";
 import { userRoutes } from "./routes/user";
 import console from "console";
+import { notificationsRoutes } from "./routes/notifications";
+import { homeRoutes } from "./routes/home";
 
 const app = fastify();
 
@@ -43,6 +45,8 @@ app.register(view, {
 app.register(authRoutes, { prefix: "/auth" });
 app.register(postRoutes, { prefix: "/post" });
 app.register(userRoutes, { prefix: "/user" });
+app.register(notificationsRoutes, { prefix: "/notification" });
+app.register(homeRoutes, { prefix: "/home" });
 
 app.get("/", (request, reply) => {
   if (request.cookies.token) {
@@ -51,20 +55,6 @@ app.get("/", (request, reply) => {
     reply.redirect("/auth/login");
   }
 });
-
-app.get(
-  "/home",
-  {
-    onRequest: authenticate,
-  },
-  (request, reply) => {
-    const model = {
-      username: request.user.username.replace("#", ""),
-    };
-
-    reply.view("src/view/home.ejs", { model });
-  },
-);
 
 app
   .listen({

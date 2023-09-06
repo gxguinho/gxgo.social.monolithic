@@ -31,7 +31,14 @@
     );
 
     if (response.status === 200) {
+      const qtd = document.querySelector("#qtd-comments");
+
+      qtd.innerHTML = parseInt(qtd.innerHTML) + 1;
       const content = (document.querySelector("#content").value = "");
+    } else {
+      const qtd = document.querySelector("#qtd-comments");
+
+      qtd.innerHTML = parseInt(qtd.innerHTML) - 1;
     }
   }
 </script>

@@ -17,13 +17,23 @@
     <div class="container">
       <%- include('./shared/sidebar', { username: model.username })%>
 
-      <main>
-        <%- include('./shared/home/new-post')%>
+      <main class="notifications-container">
+        <% model.notifications.forEach((notification)=>{ %>
+        <div class="notifications-content">
+          <img
+            class="avatar-rounded"
+            src="https://github.com/gxguinho.png"
+            alt=""
+          />
 
-        <div>
-          <% model.timeline.forEach((post)=>{ %> <%-
-          include('./shared/post.ejs', { post, user: post.user })%> <% }) %>
+          <div>
+            <a class="name"><%- notification.user.name %> </a>
+            <span style="margin: 0 12px">-</span>
+            <span class="username"><%- notification.user.username %></span>
+            <p class="notification-message"><%- notification.content %></p>
+          </div>
         </div>
+        <% }) %>
       </main>
 
       <aside class="right-sidebar">

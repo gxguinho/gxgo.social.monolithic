@@ -4,6 +4,11 @@
     <a href="/user/profile/<%= username %>"
       ><i data-lucide="user"></i><span>Profile</span></a
     >
+    <a href="/notification">
+      <i data-lucide="bell"></i>
+
+      <span>Notifications</span>
+    </a>
     <a href="/auth/logout"><i data-lucide="log-in"></i><span>Sair</span></a>
     <button>New Post</button>
   </section>
@@ -21,5 +26,9 @@
     document
       .querySelector('a[href="/user/profile/<%= username %>"]')
       .classList.add("active");
+  }
+
+  if (window.location.pathname === "/notification") {
+    document.querySelector('a[href="/notification"]').classList.add("active");
   }
 </script>

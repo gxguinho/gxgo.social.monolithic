@@ -26,7 +26,11 @@
             alt=""
           />
           <div>
-            <span class="name anchor"><%- model.post.user.name %></span>
+            <a
+              href="/user/profile/<%- model.post.user.username.replace('#', '') %>"
+              class="name anchor"
+              ><%- model.post.user.name %></a
+            >
             <span class="username"><%- model.post.user.username %> </span>
           </div>
 
@@ -50,10 +54,14 @@
 
           <div class="actions">
             <a href=""
-              ><strong><%- model.post._count.comments %></strong> Comentários</a
+              ><strong id="qtd-comments"
+                ><%- model.post._count.comments %></strong
+              >
+              Comentários</a
             >
             <a href=""
-              ><strong><%- model.post._count.likes %></strong> Curtidas</a
+              ><strong id="qtd-likes"><%- model.post._count.likes %></strong>
+              Curtidas</a
             >
           </div>
 
@@ -78,10 +86,36 @@
 
         <div class="comment"><%- include('./shared/new-comment')%></div>
 
-        <div>
+        <div class="comments-container">
           <% model.post.comments.forEach((comment)=>{ %>
-          <div>
-            <p><%- comment.content %></p>
+          <div id="comments-content">
+            <header>
+              <img src="https://github.com/gxguinho.png" alt="" />
+
+              <div>
+                <a
+                  href="/user/profile/<%- comment.user.username.replace('#', '') %>"
+                  class="name anchor"
+                  ><%- comment.user.name %></a
+                >
+                <span class="username"><%- comment.user.username %></span>
+              </div>
+
+              <div class="createdAt-container">
+                <span class="createdAt"
+                  ><%= new Intl.DateTimeFormat('pt-BR', { hour: "2-digit",
+                  minute: "2-digit", }).format(new Date(model.post.createdAt))
+                  %>
+                </span>
+                <span>-</span>
+                <span class="createdAt"
+                  ><%= new Intl.DateTimeFormat('pt-BR', { year: 'numeric',
+                  month: 'short', day: '2-digit'}).format(new
+                  Date(model.post.createdAt)) %>
+                </span>
+              </div>
+            </header>
+            <p class="comment-p"><%- comment.content %></p>
           </div>
           <% }) %>
         </div>
@@ -101,8 +135,14 @@
         const response = await axios.post("/post/<%- model.post.id %>/like");
 
         if (response?.data?.message === "like delete success") {
+          const qtd = document.querySelector("#qtd-likes");
+
+          qtd.innerHTML = parseInt(qtd.innerHTML) - 1;
           document.querySelector(".button-like").classList.remove("liked");
         } else {
+          const qtd = document.querySelector("#qtd-likes");
+
+          qtd.innerHTML = parseInt(qtd.innerHTML) + 1;
           document.querySelector(".button-like").classList.add("liked");
         }
       }
