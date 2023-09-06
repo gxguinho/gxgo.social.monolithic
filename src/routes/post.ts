@@ -13,6 +13,7 @@ export async function postRoutes(app: FastifyInstance) {
       },
       include: {
         user: true,
+        comments: true,
         _count: {
           select: {
             comments: true,

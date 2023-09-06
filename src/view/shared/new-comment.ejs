@@ -25,7 +25,10 @@
       uriMedia,
     };
 
-    const response = await axios.post("/post", data);
+    const response = await axios.post(
+      "/post/<%- model.post.id %>/comment",
+      data
+    );
 
     if (response.status === 200) {
       const content = (document.querySelector("#content").value = "");

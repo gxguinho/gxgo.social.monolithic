@@ -77,6 +77,14 @@
         </footer>
 
         <div class="comment"><%- include('./shared/new-comment')%></div>
+
+        <div>
+          <% model.post.comments.forEach((comment)=>{ %>
+          <div>
+            <p><%- comment.content %></p>
+          </div>
+          <% }) %>
+        </div>
       </main>
 
       <aside class="right-sidebar">
